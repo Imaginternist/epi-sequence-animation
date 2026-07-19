@@ -1,0 +1,1658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Epi Sequence Animation</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Epi Sequence Animation" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Epi Sequence Animation&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;epi-sequence-animation&quot; aria-label=&quot;Animated single-shot gradient-echo EPI readout and serpentine k-space traversal&quot;&gt;
+  &lt;div class=&quot;viz-controls&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;epi-play&quot;&gt;Play&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;epi-step&quot;&gt;Next event&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-ghost&quot; id=&quot;epi-reset&quot;&gt;Reset&lt;/button&gt;
+    &lt;label class=&quot;form-label&quot; for=&quot;epi-speed&quot;&gt;Speed &lt;span id=&quot;epi-speed-value&quot;&gt;1.0×&lt;/span&gt;
+      &lt;input class=&quot;form-range&quot; id=&quot;epi-speed&quot; type=&quot;range&quot; min=&quot;0.5&quot; max=&quot;3&quot; step=&quot;0.5&quot; value=&quot;1&quot;&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;epi-status&quot; aria-live=&quot;polite&quot;&gt;
+    &lt;span class=&quot;viz-badge&quot; id=&quot;epi-event-badge&quot;&gt;Excitation&lt;/span&gt;
+    &lt;span id=&quot;epi-event-label&quot;&gt;RF excitation: k-space origin&lt;/span&gt;
+    &lt;span class=&quot;text-muted&quot; id=&quot;epi-line-label&quot;&gt;Single-shot echo train&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;epi-layout&quot;&gt;
+    &lt;div class=&quot;epi-panel&quot;&gt;
+      &lt;svg id=&quot;epi-kspace&quot; viewBox=&quot;0 0 520 500&quot; role=&quot;img&quot; aria-labelledby=&quot;epi-k-title epi-k-desc&quot;&gt;
+        &lt;title id=&quot;epi-k-title&quot;&gt;Serpentine EPI k-space filling&lt;/title&gt;
+        &lt;desc id=&quot;epi-k-desc&quot;&gt;The sampling point moves from the origin to the lower-left corner, alternates horizontal readout direction, and uses short vertical phase-encoding blips between lines.&lt;/desc&gt;
+        &lt;defs&gt;
+          &lt;marker id=&quot;epi-arrow-blue&quot; markerWidth=&quot;8&quot; markerHeight=&quot;8&quot; refX=&quot;6&quot; refY=&quot;3&quot; orient=&quot;auto&quot;&gt;
+            &lt;path d=&quot;M0,0 L0,6 L7,3 z&quot; fill=&quot;var(--viz-series-1)&quot;&gt;&lt;/path&gt;
+          &lt;/marker&gt;
+          &lt;marker id=&quot;epi-arrow-orange&quot; markerWidth=&quot;8&quot; markerHeight=&quot;8&quot; refX=&quot;6&quot; refY=&quot;3&quot; orient=&quot;auto&quot;&gt;
+            &lt;path d=&quot;M0,0 L0,6 L7,3 z&quot; fill=&quot;var(--viz-series-2)&quot;&gt;&lt;/path&gt;
+          &lt;/marker&gt;
+        &lt;/defs&gt;
+        &lt;g id=&quot;epi-grid&quot;&gt;&lt;/g&gt;
+        &lt;line class=&quot;epi-axis&quot; x1=&quot;54&quot; y1=&quot;250&quot; x2=&quot;476&quot; y2=&quot;250&quot;&gt;&lt;/line&gt;
+        &lt;line class=&quot;epi-axis&quot; x1=&quot;265&quot; y1=&quot;39&quot; x2=&quot;265&quot; y2=&quot;461&quot;&gt;&lt;/line&gt;
+        &lt;text class=&quot;epi-label&quot; x=&quot;475&quot; y=&quot;239&quot; text-anchor=&quot;end&quot;&gt;+kx&lt;/text&gt;
+        &lt;text class=&quot;epi-label&quot; x=&quot;58&quot; y=&quot;239&quot;&gt;−kx&lt;/text&gt;
+        &lt;text class=&quot;epi-label&quot; x=&quot;277&quot; y=&quot;53&quot;&gt;+ky&lt;/text&gt;
+        &lt;text class=&quot;epi-label&quot; x=&quot;277&quot; y=&quot;457&quot;&gt;−ky&lt;/text&gt;
+        &lt;circle class=&quot;epi-origin&quot; cx=&quot;265&quot; cy=&quot;250&quot; r=&quot;4&quot;&gt;&lt;/circle&gt;
+        &lt;line id=&quot;epi-echo-line&quot; class=&quot;epi-echo-line&quot; x1=&quot;65&quot; x2=&quot;465&quot; y1=&quot;250&quot; y2=&quot;250&quot;&gt;&lt;/line&gt;
+        &lt;text class=&quot;epi-echo-label&quot; x=&quot;454&quot; y=&quot;240&quot; text-anchor=&quot;end&quot;&gt;center echo&lt;/text&gt;
+        &lt;g id=&quot;epi-completed-path&quot;&gt;&lt;/g&gt;
+        &lt;line id=&quot;epi-current-segment&quot; class=&quot;epi-current-segment&quot; x1=&quot;265&quot; y1=&quot;250&quot; x2=&quot;265&quot; y2=&quot;250&quot;&gt;&lt;/line&gt;
+        &lt;g id=&quot;epi-current-samples&quot;&gt;&lt;/g&gt;
+        &lt;circle id=&quot;epi-k-point&quot; class=&quot;epi-k-point&quot; cx=&quot;265&quot; cy=&quot;250&quot; r=&quot;7&quot;&gt;&lt;/circle&gt;
+        &lt;text id=&quot;epi-k-label&quot; class=&quot;epi-k-label&quot; x=&quot;278&quot; y=&quot;238&quot;&gt;k(t)&lt;/text&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;epi-panel&quot;&gt;
+      &lt;svg id=&quot;epi-waveforms&quot; viewBox=&quot;0 0 720 500&quot; role=&quot;img&quot; aria-labelledby=&quot;epi-w-title epi-w-desc&quot;&gt;
+        &lt;title id=&quot;epi-w-title&quot;&gt;Simplified EPI gradient and acquisition timing&lt;/title&gt;
+        &lt;desc id=&quot;epi-w-desc&quot;&gt;A readout prephaser and phase-encoding prephaser are followed by alternating Gx readout lobes and short Gy blips. ADC sampling is active during every readout lobe.&lt;/desc&gt;
+        &lt;text class=&quot;epi-heading&quot; x=&quot;84&quot; y=&quot;34&quot;&gt;Single-shot GE-EPI readout&lt;/text&gt;
+        &lt;text class=&quot;epi-channel&quot; x=&quot;24&quot; y=&quot;90&quot;&gt;RF&lt;/text&gt;
+        &lt;text class=&quot;epi-channel epi-gx-text&quot; x=&quot;24&quot; y=&quot;200&quot;&gt;Gx&lt;/text&gt;
+        &lt;text class=&quot;epi-channel epi-gy-text&quot; x=&quot;24&quot; y=&quot;315&quot;&gt;Gy&lt;/text&gt;
+        &lt;text class=&quot;epi-channel epi-adc-text&quot; x=&quot;19&quot; y=&quot;420&quot;&gt;ADC&lt;/text&gt;
+        &lt;line class=&quot;epi-baseline&quot; x1=&quot;84&quot; y1=&quot;100&quot; x2=&quot;690&quot; y2=&quot;100&quot;&gt;&lt;/line&gt;
+        &lt;line class=&quot;epi-baseline&quot; x1=&quot;84&quot; y1=&quot;215&quot; x2=&quot;690&quot; y2=&quot;215&quot;&gt;&lt;/line&gt;
+        &lt;line class=&quot;epi-baseline&quot; x1=&quot;84&quot; y1=&quot;330&quot; x2=&quot;690&quot; y2=&quot;330&quot;&gt;&lt;/line&gt;
+        &lt;line class=&quot;epi-baseline&quot; x1=&quot;84&quot; y1=&quot;435&quot; x2=&quot;690&quot; y2=&quot;435&quot;&gt;&lt;/line&gt;
+        &lt;path id=&quot;epi-rf-wave&quot; class=&quot;epi-wave epi-rf-wave&quot;&gt;&lt;/path&gt;
+        &lt;path id=&quot;epi-gx-wave&quot; class=&quot;epi-wave epi-gx-wave&quot;&gt;&lt;/path&gt;
+        &lt;path id=&quot;epi-gy-wave&quot; class=&quot;epi-wave epi-gy-wave&quot;&gt;&lt;/path&gt;
+        &lt;g id=&quot;epi-adc-windows&quot;&gt;&lt;/g&gt;
+        &lt;line id=&quot;epi-te-marker&quot; class=&quot;epi-te-marker&quot; x1=&quot;0&quot; y1=&quot;52&quot; x2=&quot;0&quot; y2=&quot;458&quot;&gt;&lt;/line&gt;
+        &lt;text id=&quot;epi-te-label&quot; class=&quot;epi-te-label&quot; x=&quot;0&quot; y=&quot;48&quot; text-anchor=&quot;middle&quot;&gt;TE&lt;/text&gt;
+        &lt;line id=&quot;epi-playhead&quot; class=&quot;epi-playhead&quot; x1=&quot;84&quot; y1=&quot;52&quot; x2=&quot;84&quot; y2=&quot;458&quot;&gt;&lt;/line&gt;
+        &lt;text id=&quot;epi-time-label&quot; class=&quot;epi-time-label&quot; x=&quot;96&quot; y=&quot;480&quot;&gt;RF&lt;/text&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;epi-legend text-small&quot; aria-label=&quot;Legend&quot;&gt;
+    &lt;span&gt;&lt;i class=&quot;epi-swatch epi-gx&quot;&gt;&lt;/i&gt;Gx readout: alternating horizontal motion&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;epi-swatch epi-gy&quot;&gt;&lt;/i&gt;Gy blip: next ky line&lt;/span&gt;
+    &lt;span&gt;&lt;i class=&quot;epi-swatch epi-adc&quot;&gt;&lt;/i&gt;ADC: samples acquired&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  #epi-sequence-animation {
+    width: 100%;
+    color: var(--foreground);
+  }
+  #epi-sequence-animation .viz-controls {
+    margin-bottom: 10px;
+  }
+  #epi-sequence-animation .viz-controls .form-label {
+    min-width: 170px;
+  }
+  #epi-sequence-animation .form-range {
+    width: 130px;
+  }
+  #epi-sequence-animation .epi-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  #epi-sequence-animation .epi-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+    gap: 14px;
+    align-items: start;
+  }
+  #epi-sequence-animation .epi-panel {
+    min-width: 0;
+  }
+  #epi-sequence-animation svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  #epi-sequence-animation .epi-axis,
+  #epi-sequence-animation .epi-baseline {
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+  #epi-sequence-animation .epi-grid-line {
+    stroke: var(--border);
+    stroke-width: 1;
+    opacity: 0.5;
+  }
+  #epi-sequence-animation .epi-label,
+  #epi-sequence-animation .epi-time-label,
+  #epi-sequence-animation .epi-echo-label {
+    fill: var(--muted-foreground);
+  }
+  #epi-sequence-animation .epi-heading,
+  #epi-sequence-animation .epi-channel {
+    fill: var(--foreground);
+    font-weight: 500;
+  }
+  #epi-sequence-animation .epi-gx-text {
+    fill: var(--viz-series-1);
+  }
+  #epi-sequence-animation .epi-gy-text {
+    fill: var(--viz-series-2);
+  }
+  #epi-sequence-animation .epi-adc-text {
+    fill: var(--viz-series-3);
+  }
+  #epi-sequence-animation .epi-origin {
+    fill: var(--foreground);
+  }
+  #epi-sequence-animation .epi-echo-line {
+    stroke: var(--foreground);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 7;
+    opacity: 0.45;
+  }
+  #epi-sequence-animation .epi-complete-readout {
+    stroke: var(--viz-series-1);
+    stroke-width: 3;
+    opacity: 0.36;
+  }
+  #epi-sequence-animation .epi-complete-blip {
+    stroke: var(--viz-series-2);
+    stroke-width: 2.5;
+    opacity: 0.5;
+  }
+  #epi-sequence-animation .epi-current-segment {
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+  #epi-sequence-animation .epi-current-segment.is-gx {
+    stroke: var(--viz-series-1);
+    marker-end: url(#epi-arrow-blue);
+  }
+  #epi-sequence-animation .epi-current-segment.is-gy {
+    stroke: var(--viz-series-2);
+    marker-end: url(#epi-arrow-orange);
+  }
+  #epi-sequence-animation .epi-current-segment.is-prephase {
+    stroke: var(--viz-series-2);
+    stroke-dasharray: 7 5;
+    marker-end: url(#epi-arrow-orange);
+  }
+  #epi-sequence-animation .epi-k-point {
+    fill: var(--primary);
+    stroke: var(--primary-foreground);
+    stroke-width: 2;
+  }
+  #epi-sequence-animation .epi-k-label {
+    fill: var(--foreground);
+    font-weight: 500;
+  }
+  #epi-sequence-animation .epi-sample {
+    fill: var(--viz-series-3);
+  }
+  #epi-sequence-animation .epi-wave {
+    fill: none;
+    stroke-width: 3.5;
+    stroke-linejoin: round;
+  }
+  #epi-sequence-animation .epi-rf-wave {
+    stroke: var(--foreground);
+  }
+  #epi-sequence-animation .epi-gx-wave {
+    stroke: var(--viz-series-1);
+  }
+  #epi-sequence-animation .epi-gy-wave {
+    stroke: var(--viz-series-2);
+  }
+  #epi-sequence-animation .epi-adc-window {
+    fill: var(--viz-series-3);
+    opacity: 0.42;
+  }
+  #epi-sequence-animation .epi-playhead {
+    stroke: var(--foreground);
+    stroke-width: 2;
+    opacity: 0.78;
+  }
+  #epi-sequence-animation .epi-te-marker {
+    stroke: var(--viz-series-3);
+    stroke-width: 2;
+    stroke-dasharray: 5 5;
+    opacity: 0.85;
+  }
+  #epi-sequence-animation .epi-te-label {
+    fill: var(--viz-series-3);
+    font-weight: 500;
+  }
+  #epi-sequence-animation .epi-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 5px;
+    color: var(--muted-foreground);
+  }
+  #epi-sequence-animation .epi-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #epi-sequence-animation .epi-swatch {
+    display: inline-block;
+    width: 22px;
+    height: 3px;
+  }
+  #epi-sequence-animation .epi-swatch.epi-gx {
+    background: var(--viz-series-1);
+  }
+  #epi-sequence-animation .epi-swatch.epi-gy {
+    background: var(--viz-series-2);
+  }
+  #epi-sequence-animation .epi-swatch.epi-adc {
+    background: var(--viz-series-3);
+  }
+  @media (max-width: 620px) {
+    #epi-sequence-animation .epi-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #epi-sequence-animation .epi-k-point,
+    #epi-sequence-animation .epi-current-segment,
+    #epi-sequence-animation .epi-playhead {
+      transition: none;
+    }
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;epi-sequence-animation&#x27;);
+  const playButton = root.querySelector(&#x27;#epi-play&#x27;);
+  const stepButton = root.querySelector(&#x27;#epi-step&#x27;);
+  const resetButton = root.querySelector(&#x27;#epi-reset&#x27;);
+  const speedInput = root.querySelector(&#x27;#epi-speed&#x27;);
+  const speedValue = root.querySelector(&#x27;#epi-speed-value&#x27;);
+  const eventBadge = root.querySelector(&#x27;#epi-event-badge&#x27;);
+  const eventLabel = root.querySelector(&#x27;#epi-event-label&#x27;);
+  const lineLabel = root.querySelector(&#x27;#epi-line-label&#x27;);
+  const grid = root.querySelector(&#x27;#epi-grid&#x27;);
+  const completedPath = root.querySelector(&#x27;#epi-completed-path&#x27;);
+  const currentSegment = root.querySelector(&#x27;#epi-current-segment&#x27;);
+  const currentSamples = root.querySelector(&#x27;#epi-current-samples&#x27;);
+  const kPoint = root.querySelector(&#x27;#epi-k-point&#x27;);
+  const kLabel = root.querySelector(&#x27;#epi-k-label&#x27;);
+  const rfWave = root.querySelector(&#x27;#epi-rf-wave&#x27;);
+  const gxWave = root.querySelector(&#x27;#epi-gx-wave&#x27;);
+  const gyWave = root.querySelector(&#x27;#epi-gy-wave&#x27;);
+  const adcWindows = root.querySelector(&#x27;#epi-adc-windows&#x27;);
+  const teMarker = root.querySelector(&#x27;#epi-te-marker&#x27;);
+  const teLabel = root.querySelector(&#x27;#epi-te-label&#x27;);
+  const playhead = root.querySelector(&#x27;#epi-playhead&#x27;);
+  const timeLabel = root.querySelector(&#x27;#epi-time-label&#x27;);
+
+  const NS = &#x27;http://www.w3.org/2000/svg&#x27;;
+  const lineCount = 9;
+  const sampleCount = 21;
+  const cx = 265;
+  const cy = 250;
+  const left = 65;
+  const right = 465;
+  const top = 70;
+  const bottom = 430;
+  const waveLeft = 84;
+  const waveRight = 690;
+  let eventIndex = 0;
+  let eventProgress = 0;
+  let playing = false;
+  let lastTimestamp = null;
+  let animationFrame = null;
+
+  function svgElement(name, attributes) {
+    const element = document.createElementNS(NS, name);
+    Object.entries(attributes).forEach(([key, value]) =&gt; element.setAttribute(key, value));
+    return element;
+  }
+
+  function clearGroup(group) {
+    while (group.firstChild) group.removeChild(group.firstChild);
+  }
+
+  function lineY(line) {
+    return bottom - line * ((bottom - top) / (lineCount - 1));
+  }
+
+  const events = [
+    {type: &#x27;rf&#x27;, duration: 0.55, label: &#x27;RF excitation: k-space origin&#x27;},
+    {type: &#x27;prephase&#x27;, duration: 0.9, label: &#x27;Gx + Gy prephasing: move to lower-left k-space&#x27;}
+  ];
+  for (let line = 0; line &lt; lineCount; line += 1) {
+    const forward = line % 2 === 0;
+    events.push({
+      type: &#x27;readout&#x27;,
+      duration: 1.0,
+      line,
+      forward,
+      label: `Gx ${forward ? &#x27;positive&#x27; : &#x27;negative&#x27;} readout: acquire ky line ${line + 1}`
+    });
+    if (line &lt; lineCount - 1) {
+      events.push({
+        type: &#x27;blip&#x27;,
+        duration: 0.32,
+        line,
+        label: `Gy blip: advance to ky line ${line + 2}`
+      });
+    }
+  }
+
+  const totalDuration = events.reduce((sum, event) =&gt; sum + event.duration, 0);
+  const eventStarts = [];
+  let runningTime = 0;
+  events.forEach((event) =&gt; {
+    eventStarts.push(runningTime);
+    runningTime += event.duration;
+  });
+
+  function timeToX(time) {
+    return waveLeft + (time / totalDuration) * (waveRight - waveLeft);
+  }
+
+  function eventStartPosition(index) {
+    const event = events[index];
+    if (event.type === &#x27;rf&#x27; || event.type === &#x27;prephase&#x27;) return {x: cx, y: cy};
+    if (event.type === &#x27;readout&#x27;) {
+      return {x: event.forward ? left : right, y: lineY(event.line)};
+    }
+    const priorReadout = events[index - 1];
+    return {x: priorReadout.forward ? right : left, y: lineY(event.line)};
+  }
+
+  function eventEndPosition(index) {
+    const event = events[index];
+    if (event.type === &#x27;rf&#x27;) return {x: cx, y: cy};
+    if (event.type === &#x27;prephase&#x27;) return {x: left, y: bottom};
+    if (event.type === &#x27;readout&#x27;) {
+      return {x: event.forward ? right : left, y: lineY(event.line)};
+    }
+    const start = eventStartPosition(index);
+    return {x: start.x, y: lineY(event.line + 1)};
+  }
+
+  function currentPosition() {
+    const start = eventStartPosition(eventIndex);
+    const end = eventEndPosition(eventIndex);
+    return {
+      x: start.x + (end.x - start.x) * eventProgress,
+      y: start.y + (end.y - start.y) * eventProgress
+    };
+  }
+
+  for (let i = 0; i &lt; lineCount; i += 1) {
+    const y = lineY(i);
+    grid.appendChild(svgElement(&#x27;line&#x27;, {
+      class: &#x27;epi-grid-line&#x27;, x1: left, x2: right, y1: y, y2: y
+    }));
+  }
+  for (let i = 0; i &lt; lineCount; i += 1) {
+    const x = left + i * ((right - left) / (lineCount - 1));
+    grid.appendChild(svgElement(&#x27;line&#x27;, {
+      class: &#x27;epi-grid-line&#x27;, x1: x, x2: x, y1: top, y2: bottom
+    }));
+  }
+
+  function waveformPath(channel, baseline, scale) {
+    const points = [[waveLeft, baseline]];
+    events.forEach((event, index) =&gt; {
+      const startX = timeToX(eventStarts[index]);
+      const endX = timeToX(eventStarts[index] + event.duration);
+      let amplitude = 0;
+      if (channel === &#x27;gx&#x27;) {
+        if (event.type === &#x27;prephase&#x27;) amplitude = -0.72;
+        if (event.type === &#x27;readout&#x27;) amplitude = event.forward ? 1 : -1;
+      } else if (channel === &#x27;gy&#x27;) {
+        if (event.type === &#x27;prephase&#x27;) amplitude = -0.72;
+        if (event.type === &#x27;blip&#x27;) amplitude = 0.76;
+      }
+      points.push([startX, baseline]);
+      points.push([startX, baseline - amplitude * scale]);
+      points.push([endX, baseline - amplitude * scale]);
+      points.push([endX, baseline]);
+    });
+    points.push([waveRight, baseline]);
+    return points.map((point, index) =&gt; `${index === 0 ? &#x27;M&#x27; : &#x27;L&#x27;}${point[0]} ${point[1]}`).join(&#x27; &#x27;);
+  }
+
+  function buildWaveforms() {
+    const rfStart = timeToX(eventStarts[0]);
+    const rfEnd = timeToX(eventStarts[0] + events[0].duration);
+    const rfCenter = (rfStart + rfEnd) / 2;
+    rfWave.setAttribute(&#x27;d&#x27;, `M${waveLeft} 100 L${rfStart} 100 L${rfCenter - 13} 100 L${rfCenter - 8} 76 L${rfCenter - 3} 119 L${rfCenter + 3} 81 L${rfCenter + 8} 112 L${rfCenter + 13} 100 L${waveRight} 100`);
+    gxWave.setAttribute(&#x27;d&#x27;, waveformPath(&#x27;gx&#x27;, 215, 48));
+    gyWave.setAttribute(&#x27;d&#x27;, waveformPath(&#x27;gy&#x27;, 330, 44));
+
+    clearGroup(adcWindows);
+    events.forEach((event, index) =&gt; {
+      if (event.type !== &#x27;readout&#x27;) return;
+      const x1 = timeToX(eventStarts[index]);
+      const x2 = timeToX(eventStarts[index] + event.duration);
+      adcWindows.appendChild(svgElement(&#x27;rect&#x27;, {
+        class: &#x27;epi-adc-window&#x27;, x: x1, y: 414, width: Math.max(1, x2 - x1), height: 21
+      }));
+    });
+
+    const centerReadoutIndex = events.findIndex((event) =&gt; event.type === &#x27;readout&#x27; &amp;&amp; event.line === Math.floor(lineCount / 2));
+    const teTime = eventStarts[centerReadoutIndex] + events[centerReadoutIndex].duration / 2;
+    const teX = timeToX(teTime);
+    teMarker.setAttribute(&#x27;x1&#x27;, teX);
+    teMarker.setAttribute(&#x27;x2&#x27;, teX);
+    teLabel.setAttribute(&#x27;x&#x27;, teX);
+  }
+
+  function drawCompletedTrajectory() {
+    clearGroup(completedPath);
+    for (let i = 0; i &lt; eventIndex; i += 1) {
+      const event = events[i];
+      if (event.type !== &#x27;readout&#x27; &amp;&amp; event.type !== &#x27;blip&#x27;) continue;
+      const start = eventStartPosition(i);
+      const end = eventEndPosition(i);
+      completedPath.appendChild(svgElement(&#x27;line&#x27;, {
+        class: event.type === &#x27;readout&#x27; ? &#x27;epi-complete-readout&#x27; : &#x27;epi-complete-blip&#x27;,
+        x1: start.x, y1: start.y, x2: end.x, y2: end.y
+      }));
+      if (event.type === &#x27;readout&#x27;) {
+        for (let sample = 0; sample &lt; sampleCount; sample += 1) {
+          const fraction = sample / (sampleCount - 1);
+          const x = start.x + (end.x - start.x) * fraction;
+          completedPath.appendChild(svgElement(&#x27;circle&#x27;, {
+            class: &#x27;epi-sample&#x27;, cx: x, cy: start.y, r: 2.5
+          }));
+        }
+      }
+    }
+  }
+
+  function drawCurrentSamples() {
+    clearGroup(currentSamples);
+    const event = events[eventIndex];
+    if (event.type !== &#x27;readout&#x27;) return;
+    const start = eventStartPosition(eventIndex);
+    const end = eventEndPosition(eventIndex);
+    const visibleCount = Math.floor(eventProgress * sampleCount);
+    for (let sample = 0; sample &lt; visibleCount; sample += 1) {
+      const fraction = sample / (sampleCount - 1);
+      const x = start.x + (end.x - start.x) * fraction;
+      currentSamples.appendChild(svgElement(&#x27;circle&#x27;, {
+        class: &#x27;epi-sample&#x27;, cx: x, cy: start.y, r: 3
+      }));
+    }
+  }
+
+  function eventBadgeText(event) {
+    if (event.type === &#x27;rf&#x27;) return &#x27;Excitation&#x27;;
+    if (event.type === &#x27;prephase&#x27;) return &#x27;Prephase&#x27;;
+    if (event.type === &#x27;readout&#x27;) return `Echo ${event.line + 1}`;
+    return &#x27;Gy blip&#x27;;
+  }
+
+  function eventSecondaryText(event) {
+    if (event.type === &#x27;rf&#x27;) return &#x27;Single-shot echo train&#x27;;
+    if (event.type === &#x27;prephase&#x27;) return &#x27;Prepare the first readout line&#x27;;
+    if (event.type === &#x27;readout&#x27;) {
+      const direction = event.forward ? &#x27;−kx → +kx&#x27; : &#x27;+kx → −kx&#x27;;
+      return `ky line ${event.line + 1} / ${lineCount} · ${direction}`;
+    }
+    return `Δky step after line ${event.line + 1}`;
+  }
+
+  function render() {
+    const event = events[eventIndex];
+    const start = eventStartPosition(eventIndex);
+    const position = currentPosition();
+    kPoint.setAttribute(&#x27;cx&#x27;, position.x);
+    kPoint.setAttribute(&#x27;cy&#x27;, position.y);
+    kLabel.setAttribute(&#x27;x&#x27;, Math.min(position.x + 12, 470));
+    kLabel.setAttribute(&#x27;y&#x27;, Math.max(position.y - 12, 47));
+    currentSegment.setAttribute(&#x27;x1&#x27;, start.x);
+    currentSegment.setAttribute(&#x27;y1&#x27;, start.y);
+    currentSegment.setAttribute(&#x27;x2&#x27;, position.x);
+    currentSegment.setAttribute(&#x27;y2&#x27;, position.y);
+    currentSegment.setAttribute(&#x27;class&#x27;, `epi-current-segment ${event.type === &#x27;readout&#x27; ? &#x27;is-gx&#x27; : event.type === &#x27;blip&#x27; ? &#x27;is-gy&#x27; : event.type === &#x27;prephase&#x27; ? &#x27;is-prephase&#x27; : &#x27;&#x27;}`);
+    eventBadge.textContent = eventBadgeText(event);
+    eventLabel.textContent = event.label;
+    lineLabel.textContent = eventSecondaryText(event);
+    const currentTime = eventStarts[eventIndex] + event.duration * eventProgress;
+    const playheadX = timeToX(currentTime);
+    playhead.setAttribute(&#x27;x1&#x27;, playheadX);
+    playhead.setAttribute(&#x27;x2&#x27;, playheadX);
+    timeLabel.setAttribute(&#x27;x&#x27;, Math.max(waveLeft + 12, Math.min(playheadX, waveRight - 35)));
+    timeLabel.textContent = event.type === &#x27;readout&#x27; ? `echo ${event.line + 1}` : event.type === &#x27;blip&#x27; ? &#x27;Gy blip&#x27; : event.type;
+    playButton.textContent = playing ? &#x27;Pause&#x27; : &#x27;Play&#x27;;
+    drawCompletedTrajectory();
+    drawCurrentSamples();
+  }
+
+  function advanceEvent() {
+    if (eventIndex &lt; events.length - 1) {
+      eventIndex += 1;
+      eventProgress = 0;
+      render();
+      return true;
+    }
+    eventIndex = events.length;
+    playing = false;
+    drawCompletedTrajectory();
+    eventBadge.textContent = &#x27;Complete&#x27;;
+    eventLabel.textContent = &#x27;Single-shot EPI k-space acquisition complete&#x27;;
+    lineLabel.textContent = `${lineCount} echoes acquired after one excitation`;
+    playButton.textContent = &#x27;Replay&#x27;;
+    return false;
+  }
+
+  function animate(timestamp) {
+    if (!playing) return;
+    if (lastTimestamp === null) lastTimestamp = timestamp;
+    const delta = (timestamp - lastTimestamp) / 1000;
+    lastTimestamp = timestamp;
+    eventProgress += delta * Number(speedInput.value) / events[eventIndex].duration;
+    if (eventProgress &gt;= 1) {
+      eventProgress = 1;
+      render();
+      if (!advanceEvent()) return;
+    } else {
+      render();
+    }
+    animationFrame = requestAnimationFrame(animate);
+  }
+
+  function reset() {
+    playing = false;
+    lastTimestamp = null;
+    eventIndex = 0;
+    eventProgress = 0;
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    render();
+  }
+
+  playButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+    if (eventIndex &gt;= events.length) reset();
+    playing = !playing;
+    lastTimestamp = null;
+    render();
+    if (playing) animationFrame = requestAnimationFrame(animate);
+  });
+
+  stepButton.addEventListener(&#x27;click&#x27;, () =&gt; {
+    playing = false;
+    lastTimestamp = null;
+    eventProgress = 1;
+    render();
+    advanceEvent();
+  });
+
+  resetButton.addEventListener(&#x27;click&#x27;, reset);
+  speedInput.addEventListener(&#x27;input&#x27;, () =&gt; {
+    speedValue.textContent = `${Number(speedInput.value).toFixed(1)}×`;
+  });
+
+  buildWaveforms();
+  render();
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>
